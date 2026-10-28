@@ -53,6 +53,16 @@
             y: {
               beginAtZero: true
             }
+          }, 
+          plugins: {
+              legend: {
+                position: 'bottom', 
+              },
+              title: {
+                display: true, 
+                text: 'Cat vs. Dog People' 
+              }
+            }
           }
         },
       }); 
@@ -61,7 +71,7 @@
     <br> 
     <br>
     <script> 
-      //const DATA_COUNT = 11; 
+      const DATA_COUNT = 11; 
       const labels = ['Person 1', 'Person 2', 'Person 3', 'Person 4', 'Person 5', 'Person 6', 'Person 7', 'Person 8', 'Person 9', 'Person 10', 'Person 11']
       const data = {
         labels, 
@@ -100,13 +110,13 @@
     </script>
     <style>
       .charts-containers{
-        width: 65%; 
-        text-align: center; 
+        width: 50%; 
+        align-items: center; 
       }
     </style>
     <h2 style = "text-align:center;"> Why my design choices? </h2>
     <br>
-    <p2 style = "text-align:center;"> 
+    <p2 style = "text-align:center; max-width: 50%;"> 
       explain choices like type of chart, color theme for charts and the actual background, text font, etc. 
     </p2>
 
