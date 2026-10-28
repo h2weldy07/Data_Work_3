@@ -30,7 +30,7 @@
       const data = {
         labels: labels, 
         datasets: [{
-          label: 'Cat vs Dog Person',  
+          label: ['Cat', 'Dog', 'Neither'],  
           data:[8, 11, 3], 
           backgroundColor: [
             'rgba(245, 40, 145, 0.8)', 
@@ -61,7 +61,7 @@
     <br> 
     <br>
     <script> 
-      const DATA_COUNT = 11; 
+      //const DATA_COUNT = 11; 
       const data = {
         datasets: [
           {
@@ -96,6 +96,12 @@
         },
       }); 
     </script>
+    <style>
+      .charts-containers{
+        width: 100px; 
+        max-width: 200px; 
+      }
+    </style>
     <h2 style = "text-align:center;"> Why my design choices? </h2>
     <br>
     <p2 style = "text-align:center;"> 
