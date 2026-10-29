@@ -106,7 +106,7 @@
         return ctx.chart
           .getDatasetMeta(ctx.datasetIndex)
           .data[ctx.index - 1] 
-          .getPropos(['y'], true).y;
+          .getProps(['y'], true).y;
       }; 
 
       const animation = {
@@ -134,9 +134,9 @@
         }
       };
 
-      new Chart(document.getElementbyId('lines'), {
+      new Chart(document.getElementById('lines'), {
         type: 'line', 
-        data_line, 
+        data: data_line, 
         options:{
           animation, 
           interaction:{
