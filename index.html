@@ -21,10 +21,13 @@
     <div class = "Dog">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST9UjitrpsLDBn81E7T6MBLb9JSMOr5lFtBKtU6dScSA&s=10"> 
     </div> -->
-    <div class="both_charts">
+    <div class="bar">
       <canvas id = "mychart"></canvas>
+    </div>
+    <div class="lines">
       <canvas id = "line"></canvas>
     </div>
+  
     <!--<h> Votes on Cats verus Dogs</h>-->
     <script>
       const labels = ['Cat', 'Dog', 'Neither']; 
@@ -123,9 +126,13 @@
     </script>
 
     <style>
-      .charts-containers{
-        width: 50%; 
-        align-items: center; 
+      .bar{
+        max-width: 50%; 
+        margin: 2%;
+      }
+      .lines{
+        max-width: 50%; 
+        margin: 2%; 
       }
     </style>
    
