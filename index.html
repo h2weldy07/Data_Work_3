@@ -22,7 +22,7 @@
     <div class="bar">
       <canvas id = "mychart"></canvas>
     </div>
-    <div class="line_chart">
+    <div class="line_chart" >
       <canvas id = "lines"></canvas>
     </div>
   
@@ -79,7 +79,7 @@
           {
             label: 'Cat intakes', 
             data: [3.7, 3.8, 3.3, 3.5, 3.5, 3.5 , 3.5 , 3.5], 
-            borderColor: 'red', 
+            borderColor: 'rgba(245, 40, 145, 0.8)', 
             borderWidth: 2, 
             pointRadius: 0, 
             tension: 0.3
@@ -87,14 +87,14 @@
           {
             label: 'Dog intakes', 
             data: [4.4, 4.4, 3.6, 3.7, 3.8, 3.7, 3.6, 3.5], 
-            borderColor: 'blue',  
+            borderColor: 'rgba(41, 128, 255, 0.8)',  
             borderWidth: 2, 
             pointRadius: 0, 
             tension: 0.3
           }
         ]   
       }; 
-      const totalDuration = 10000; 
+      const totalDuration = 5000; 
       const maxPoints = Math.max(...data.datasets.map(ds => ds.data.length)); 
       const delayBetweenPoints = totalDuration / maxPoints; 
       
@@ -146,10 +146,10 @@
             legend: {
               display: true
             }
-            //title: {
-              //display: true, 
-              //text: 'Intakes of Cats and Dogs in Rescues and Shelter in Millions'
-            //}
+            title: {
+              display: true, 
+              text: 'Intakes of Cats and Dogs in Rescues and Shelter in Millions'
+            }
           }, 
           scales: {
             x:{
@@ -168,10 +168,10 @@
         max-width: 50%; 
         transform: translate(0px, -100px); 
       }
-      .lines{
+     .line_chart{
         max-width: 50%; 
       }
-    </style>
+    </style> 
    
     <h2 style = "text-align:center;"> Why my design choices? </h2>
     <br>
