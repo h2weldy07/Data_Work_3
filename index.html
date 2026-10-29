@@ -7,12 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
   </head>
   <body>
-    <style>
-      .charts-containers{
-        width: 50%; 
-        align-items: center; 
-      }
-    </style>
+    
 
     <h1 style = "text-align:center;"> The Popular Debate of Cats vs Dogs </h1> 
     <p1 style ="text-align:center; margin:2%;"> 
@@ -30,14 +25,14 @@
       <canvas id = "mychart"></canvas>
       <canvas id = "line"></canvas>
     </div>
-    <h> Votes on Cats verus Dogs</h>
+    <!--<h> Votes on Cats verus Dogs</h>-->
     <script>
       const labels = ['Cat', 'Dog', 'Neither']; 
   
       const data = {
         labels, 
         datasets: [{
-          //label: ['Cat', 'Dog', 'Neither'],  
+          label: ['Cat', 'Dog', 'Neither'],  
           data:[8, 11, 3], 
           backgroundColor: [
             'rgba(245, 40, 145, 0.8)', 
@@ -56,6 +51,12 @@
         type: 'bar', 
         data: data, 
         options: {
+          plugins:{
+            title: {
+              display: true, 
+              text:'Votes on Cats verus Dogs'
+            }
+          },
           scales: {
             y: {
               beginAtZero: true
@@ -67,7 +68,7 @@
     </script>
     <br> 
     <br>
-    <h>Intakes of Cats and Dogs in Rescues and Shelter in Millions </h>
+    <!--<h>Intakes of Cats and Dogs in Rescues and Shelter in Millions </h>-->
     <script>
       const labels =['2018', 2019', '2020', '2021', '2022', '2023', '2024', '2025']; 
 
@@ -93,7 +94,7 @@
         ]   
       }; 
 
-      new Chart(document.getElementbyId('mychart'), {
+      new Chart(document.getElementbyId('line'), {
         type: 'line', 
         data, 
         options:{
@@ -103,6 +104,10 @@
           plugins:{
             legend: {
               display: true
+            },
+            title: {
+              display: true, 
+              text: 'Intakes of Cats and Dogs in Rescues and Shelter in Millions'
             }
           }, 
           scales: {
@@ -116,6 +121,13 @@
         }
       }); 
     </script>
+
+    <style>
+      .charts-containers{
+        width: 50%; 
+        align-items: center; 
+      }
+    </style>
    
     <h2 style = "text-align:center;"> Why my design choices? </h2>
     <br>
