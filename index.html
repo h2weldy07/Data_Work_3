@@ -28,7 +28,6 @@
       <canvas id = "line"></canvas>
     </div>
   
-    <!--<h> Votes on Cats verus Dogs</h>-->
     <script>
       const labels = ['Cat', 'Dog', 'Neither']; 
   
@@ -55,9 +54,12 @@
         data: data, 
         options: {
           plugins:{
+            legend: {
+              display: true
+            },
             title: {
               display: true, 
-              text:'Votes on Cats verus Dogs'
+              text:'Votes on Cats V.S. Dogs'
             }
           },
           scales: {
@@ -73,10 +75,10 @@
     <br>
     <!--<h>Intakes of Cats and Dogs in Rescues and Shelter in Millions </h>-->
     <script>
-      const labels =['2018', 2019', '2020', '2021', '2022', '2023', '2024', '2025']; 
+      const labels_line =['2018', 2019', '2020', '2021', '2022', '2023', '2024', '2025']; 
 
-      const data = {
-        labels, 
+      const data_line = {
+        labels_line, 
         datasets: [
           {
             label: 'Cat intakes', 
@@ -96,10 +98,20 @@
           }
         ]   
       }; 
+      const previousY = (ctx) => {
+        if (ctx.index === 0) {
+          return ctx.chart.scales.y.getPixelForValue(0); 
+        }
+
+        return ctx.chart
+          .getDatasetMeta(ctx.datasetIndex)
+          .data[ctx.index - 1] 
+          .getPropos(['y'], true).y;
+      }; 
 
       new Chart(document.getElementbyId('line'), {
         type: 'line', 
-        data, 
+        data_line, 
         options:{
           interaction:{
             intersect: false
