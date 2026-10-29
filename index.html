@@ -7,11 +7,17 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
   </head>
   <body>
+    <style>
+      .charts-containers{
+        width: 50%; 
+        align-items: center; 
+      }
+    </style>
 
     <h1 style = "text-align:center;"> The Popular Debate of Cats vs Dogs </h1> 
-    <p1 style ="text-align:center;"> 
-      On this page I will be examining FAKE data about people's votes on cats versus dogs. 
-      Also, I want to preference that I am currently taking a web design course that is utilizing 
+    <p1 style ="text-align:center; margin:2%;"> 
+      On this page I will be examining FAKE data about people's votes on cats versus dogs, and REAL data about the total amount of cats verus dogs that come in
+      to shelters and recuses over the years. Also, I want to preference that I am currently taking a web design course that is utilizing 
       Html, Css, and JS. 
     </p1>
    <!--<div class="Cat" style="width:20px;"> 
@@ -20,15 +26,18 @@
     <div class = "Dog">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST9UjitrpsLDBn81E7T6MBLb9JSMOr5lFtBKtU6dScSA&s=10"> 
     </div> -->
-    <div class = "charts-containers">
+    <div class="both_charts">
       <canvas id = "mychart"></canvas>
-      <canvas id = "scatter"></canvas>
+      <canvas id = "line"></canvas>
     </div>
+    <h> Votes on Cats verus Dogs</h>
     <script>
+      const labels = ['Cat', 'Dog', 'Neither']; 
   
       const data = {
+        labels, 
         datasets: [{
-          label: ['Cat', 'Dog', 'Neither'],  
+          //label: ['Cat', 'Dog', 'Neither'],  
           data:[8, 11, 3], 
           backgroundColor: [
             'rgba(245, 40, 145, 0.8)', 
@@ -58,52 +67,59 @@
     </script>
     <br> 
     <br>
-    <script> 
-      const DATA_COUNT = 11; 
-      const labels = ['Person 1', 'Person 2', 'Person 3', 'Person 4', 'Person 5', 'Person 6', 'Person 7', 'Person 8', 'Person 9', 'Person 10', 'Person 11']
+    <h>Intakes of Cats and Dogs in Rescues and Shelter in Millions </h>
+    <script>
+      const labels =['2018', 2019', '2020', '2021', '2022', '2023', '2024', '2025']; 
+
       const data = {
+        labels, 
         datasets: [
           {
-            label: 'Number of Cats in Household',
-            data: [3, 2, 0, 1, 0, 0, 3, 2, 1, 0, 2], 
+            label: 'Cat intakes', 
+            data: ['3.7','3.8','3.3','3.5','3.5','3.5','3.5','3.5'], 
             borderColor: 'rgb(252, 3, 98)', 
-            backgroundColor: 'rgba(245, 40, 145, 0.8)',
+            borderWidth: 2, 
+            pointRadius: 0, 
+            tension: 0.3
           }, 
           {
-            label: 'Number of Dogs in Household', 
-            data: [1, 1, 2, 1, 2, 3, 0, 0, 3, 2, 1], 
-            borderColor: 'rgb(3, 144, 252)', 
-            backgroundColor: 'rgba(41, 128, 255, 0.8)',
+            label: 'Dog intakes', 
+            data: ['4.4', '4.4', '3.6', '3.7', '3.8', '3.7', '3.8', '3.7', '3.6', '3.5'], 
+            borderColor: 'rgb(3, 144, 252)',  
+            borderWidth: 2, 
+            pointRadius: 0, 
+            tension: 0.3
           }
-        ]
-      };
-      
-      new Chart(document.getElementById('scatter'), {
-        type: 'scatter', 
-        data: data, 
-        options: {
-          responsive: true, 
-          plugins: {
+        ]   
+      }; 
+
+      new Chart(document.getElementbyId('mychart'), {
+        type: 'line', 
+        data, 
+        options:{
+          interaction:{
+            intersect: false
+          }, 
+          plugins:{
             legend: {
-              position: 'top', 
+              display: true
+            }
+          }, 
+          scales: {
+            x:{
+              type:'category'
             }, 
-            title:{
-              display: true, 
-              text: 'How many Pets do you Have?' 
+            y:{
+              beginAtZero: true
             }
           }
-        },
+        }
       }); 
     </script>
-    <style>
-      .charts-containers{
-        width: 50%; 
-        align-items: center; 
-      }
-    </style>
+   
     <h2 style = "text-align:center;"> Why my design choices? </h2>
     <br>
-    <p2 style = "text-align:center; max-width: 50%;"> 
+    <p2 style = "text-align:center; margin: 2%;"> 
       explain choices like type of chart, color theme for charts and the actual background, text font, etc. 
     </p2>
 
