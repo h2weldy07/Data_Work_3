@@ -98,6 +98,10 @@
           }
         ]   
       }; 
+      const totalDuration = 10000; 
+      const maxPoints = Math.max(...data.datasets.map(ds => ds.data.length)); 
+      const delayBetweenPoints = totalDuration / maxPoints; 
+      
       const previousY = (ctx) => {
         if (ctx.index === 0) {
           return ctx.chart.scales.y.getPixelForValue(0); 
@@ -109,10 +113,36 @@
           .getPropos(['y'], true).y;
       }; 
 
+      const animation = {
+        x: {
+          type: 'number',
+          easing: 'linear', 
+          duration: delayBetweenPoints, 
+          form: NaN, 
+          delay(ctx){
+            if (ctx.type !== 'data' || ctx.xStarted) return 0; 
+            ctx.xStarted = true; 
+            return ctx.index * delayBetweenPoints; 
+          }
+        }, 
+        y: {
+          type: 'number', 
+          easing: 'linear', 
+          duration: delayBetweenPoints, 
+          from:previousY, 
+          delay(ctx){
+            if (ctx.type !== 'data' || ctx.yStarted) return 0;
+            ctx.yStarted = true; 
+            return ctx.index * delayBetweenPoints;
+          }
+        }
+      };
+
       new Chart(document.getElementbyId('line'), {
         type: 'line', 
         data_line, 
         options:{
+          animation, 
           interaction:{
             intersect: false
           }, 
