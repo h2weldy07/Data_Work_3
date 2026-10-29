@@ -74,10 +74,10 @@
       const line_labels =['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']; 
 
       const data_line = {
-        line_labels, 
+        labels: line_labels, 
         datasets: [
           {
-            labels: 'Cat intakes', 
+            label: 'Cat intakes', 
             data: [3.7, 3.8, 3.3, 3.5, 3.5, 3.5 , 3.5 , 3.5], 
             borderColor: 'red', 
             borderWidth: 2, 
@@ -86,7 +86,7 @@
           }, 
           {
             label: 'Dog intakes', 
-            data: [4.4, 4.4, 3.6, 3.7, 3.8, 3.7, 3.8, 3.7, 3.6, 3.5], 
+            data: [4.4, 4.4, 3.6, 3.7, 3.8, 3.7, 3.6, 3.5], 
             borderColor: 'blue',  
             borderWidth: 2, 
             pointRadius: 0, 
@@ -114,7 +114,7 @@
           type: 'number',
           easing: 'linear', 
           duration: delayBetweenPoints, 
-          form: NaN, 
+          from: NaN, 
           delay(ctx){
             if (ctx.type !== 'data' || ctx.xStarted) return 0; 
             ctx.xStarted = true; 
