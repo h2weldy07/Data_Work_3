@@ -16,172 +16,178 @@
       Html, Css, and JS. 
     </p>
     <br>
-   <div class="Cat" style="transform: translate(900px, 75px);"> 
-      <img src ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhgAmQcOg7f5cvPkTPtXt_4k5Nfuw2HMulHMQcfU7T7g&s=10" width = "500" height = "300">  
-    </div>
-    <div class="bar">
-      <canvas id = "mychart"></canvas>
-    </div>
-    <div class="line_chart" >
-      <canvas id = "lines"></canvas>
-    </div>
-  
-    <script>
-      const labels = ['Cat', 'Dog', 'Neither']; 
-  
-      const data = {
-        labels, 
-        datasets: [{
-          label: ['Cat', 'Dog', 'Neither'],  
-          data:[8, 11, 3], 
-          backgroundColor: [
-            'rgba(245, 40, 145, 0.8)', 
-            'rgba(41, 128, 255, 0.8)', 
-            'rgba(154, 157, 158, 0.94)'
-          ], 
-          borderColor: [
-            'rgb(252, 3, 98)', 
-            'rgb(3, 144, 252)',
-            'rgb(56,62,66)'
-          ],
-          borderWidth:1
-        }]
-      }; 
-      new Chart(document.getElementById('mychart'), {
-        type: 'bar', 
-        data: data, 
-        options: {
-          plugins:{
-            title: {
-              display: true, 
-              text:'Votes on Cats V.S. Dogs'
+   <div class="part_1"> 
+     <div class="Cat"> 
+        <img src ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhgAmQcOg7f5cvPkTPtXt_4k5Nfuw2HMulHMQcfU7T7g&s=10" width = "500" height = "300">  
+      </div>
+      <div class="bar">
+        <canvas id = "mychart"></canvas>
+      </div>
+      <div class="line_chart" >
+        <canvas id = "lines"></canvas>
+      </div>
+    
+      <script>
+        const labels = ['Cat', 'Dog', 'Neither']; 
+    
+        const data = {
+          labels, 
+          datasets: [{
+            label: ['Cat', 'Dog', 'Neither'],  
+            data:[8, 11, 3], 
+            backgroundColor: [
+              'rgba(245, 40, 145, 0.8)', 
+              'rgba(41, 128, 255, 0.8)', 
+              'rgba(154, 157, 158, 0.94)'
+            ], 
+            borderColor: [
+              'rgb(252, 3, 98)', 
+              'rgb(3, 144, 252)',
+              'rgb(56,62,66)'
+            ],
+            borderWidth:1
+          }]
+        }; 
+        new Chart(document.getElementById('mychart'), {
+          type: 'bar', 
+          data: data, 
+          options: {
+            plugins:{
+              title: {
+                display: true, 
+                text:'Votes on Cats V.S. Dogs'
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true
+              }
             }
           },
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        },
-      }); 
-      
-    </script>
+        }); 
+        
+      </script>
+   </div> 
     <br>
-    <div class = "Dog" style = "transform: translate(900px,-535px);">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkab4trirPG_CpWeDlWUd6l9gngaRcqzzqckLAm0MTrg&s=10" width ="500" height = "300" "> 
-    </div> 
-    <script>
-      const line_labels =['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']; 
-
-      const data_line = {
-        labels: line_labels, 
-        datasets: [
-          {
-            label: 'Cat intakes', 
-            data: [3.7, 3.8, 3.3, 3.5, 3.5, 3.5 , 3.5 , 3.5], 
-            borderColor: 'rgba(245, 40, 145, 0.8)', 
-            borderWidth: 2, 
-            pointRadius: 0, 
-            tension: 0.3
-          }, 
-          {
-            label: 'Dog intakes', 
-            data: [4.4, 4.4, 3.6, 3.7, 3.8, 3.7, 3.6, 3.5], 
-            borderColor: 'rgba(41, 128, 255, 0.8)',  
-            borderWidth: 2, 
-            pointRadius: 0, 
-            tension: 0.3
-          }
-        ]   
-      }; 
-      const totalDuration = 5000; 
-      const maxPoints = Math.max(...data.datasets.map(ds => ds.data.length)); 
-      const delayBetweenPoints = totalDuration / maxPoints; 
-      
-      const previousY = (ctx) => {
-        if (ctx.index === 0) {
-          return ctx.chart.scales.y.getPixelForValue(0); 
-        }
-
-        return ctx.chart
-          .getDatasetMeta(ctx.datasetIndex)
-          .data[ctx.index - 1] 
-          .getProps(['y'], true).y;
-      }; 
-
-      const animation = {
-        x: {
-          type: 'number',
-          easing: 'linear', 
-          duration: delayBetweenPoints, 
-          from: NaN, 
-          delay(ctx){
-            if (ctx.type !== 'data' || ctx.xStarted) return 0; 
-            ctx.xStarted = true; 
-            return ctx.index * delayBetweenPoints; 
-          }
-        }, 
-        y: {
-          type: 'number', 
-          easing: 'linear', 
-          duration: delayBetweenPoints, 
-          from:previousY, 
-          delay(ctx){
-            if (ctx.type !== 'data' || ctx.yStarted) return 0;
-            ctx.yStarted = true; 
-            return ctx.index * delayBetweenPoints;
-          }
-        }
-      };
-
-      new Chart(document.getElementById('lines'), {
-        type: 'line', 
-        data: data_line, 
-        options:{
-          animation, 
-          interaction:{
-            intersect: false
-          }, 
-          plugins:{
-            legend: {
-              display: true
-            },
-            title: {
-              display: true, 
-              text: 'Intakes of Cats and Dogs in Rescues and Shelters in Millions'
-            }
-          }, 
-          scales: {
-            x:{
-              type:'category'
+    <div class ="part_2">
+      <div class = "Dog" style = "transform: translate(900px,-535px);">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkab4trirPG_CpWeDlWUd6l9gngaRcqzzqckLAm0MTrg&s=10" width ="500" height = "300" "> 
+      </div> 
+      <script>
+        const line_labels =['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']; 
+  
+        const data_line = {
+          labels: line_labels, 
+          datasets: [
+            {
+              label: 'Cat intakes', 
+              data: [3.7, 3.8, 3.3, 3.5, 3.5, 3.5 , 3.5 , 3.5], 
+              borderColor: 'rgba(245, 40, 145, 0.8)', 
+              borderWidth: 2, 
+              pointRadius: 0, 
+              tension: 0.3
             }, 
-            y:{
-              beginAtZero: true
+            {
+              label: 'Dog intakes', 
+              data: [4.4, 4.4, 3.6, 3.7, 3.8, 3.7, 3.6, 3.5], 
+              borderColor: 'rgba(41, 128, 255, 0.8)',  
+              borderWidth: 2, 
+              pointRadius: 0, 
+              tension: 0.3
+            }
+          ]   
+        }; 
+        const totalDuration = 5000; 
+        const maxPoints = Math.max(...data.datasets.map(ds => ds.data.length)); 
+        const delayBetweenPoints = totalDuration / maxPoints; 
+        
+        const previousY = (ctx) => {
+          if (ctx.index === 0) {
+            return ctx.chart.scales.y.getPixelForValue(0); 
+          }
+  
+          return ctx.chart
+            .getDatasetMeta(ctx.datasetIndex)
+            .data[ctx.index - 1] 
+            .getProps(['y'], true).y;
+        }; 
+  
+        const animation = {
+          x: {
+            type: 'number',
+            easing: 'linear', 
+            duration: delayBetweenPoints, 
+            from: NaN, 
+            delay(ctx){
+              if (ctx.type !== 'data' || ctx.xStarted) return 0; 
+              ctx.xStarted = true; 
+              return ctx.index * delayBetweenPoints; 
+            }
+          }, 
+          y: {
+            type: 'number', 
+            easing: 'linear', 
+            duration: delayBetweenPoints, 
+            from:previousY, 
+            delay(ctx){
+              if (ctx.type !== 'data' || ctx.yStarted) return 0;
+              ctx.yStarted = true; 
+              return ctx.index * delayBetweenPoints;
             }
           }
-        }
-      }); 
-    </script>
-    <div style = "transform:translate(0px, -400px);">
-      <h2 style = "text-align:center;"> Why my design choices? </h2>
-      <br>
-      <p style = "margin-left: 2%; margin-right:2%; text-align:center; line-height: 30px; "> 
-        I wanted to keep a consistent color scheme for the graphs and I picked the colors blue, pink, and grey. The pink and blue contrast nicely, and the grey was good for not drawing as much attention. 
-        Normally, cats are seen as more feminine, which is why I assigned them to pink. Also, with the incorporation of cat and dog photos it helps draw attention to the topic of the data. 
-        Additionally, having the same format of graph and a picture besides it, allows a nice flow of the page and makes it more aesthetically pleasing to look at. 
-        Finally, I wanted to have a sandwich type format with how it starts with text and then ends in text, and the middle of the sandwich are the visuals, because it keeps a consistent format throughout the page. 
-      </p>
-    </div>    
+        };
+  
+        new Chart(document.getElementById('lines'), {
+          type: 'line', 
+          data: data_line, 
+          options:{
+            animation, 
+            interaction:{
+              intersect: false
+            }, 
+            plugins:{
+              legend: {
+                display: true
+              },
+              title: {
+                display: true, 
+                text: 'Intakes of Cats and Dogs in Rescues and Shelters in Millions'
+              }
+            }, 
+            scales: {
+              x:{
+                type:'category'
+              }, 
+              y:{
+                beginAtZero: true
+              }
+            }
+          }
+        }); 
+      </script>
+    </div>
+    <h2 style = "text-align:center;"> Why my design choices? </h2>
+    <br>
+    <p style = "margin-left: 2%; margin-right:2%; text-align:center; line-height: 30px; "> 
+      I wanted to keep a consistent color scheme for the graphs and I picked the colors blue, pink, and grey. The pink and blue contrast nicely, and the grey was good for not drawing as much attention. 
+      Normally, cats are seen as more feminine, which is why I assigned them to pink. Also, with the incorporation of cat and dog photos it helps draw attention to the topic of the data. 
+      Additionally, having the same format of graph and a picture besides it, allows a nice flow of the page and makes it more aesthetically pleasing to look at. 
+      Finally, I wanted to have a sandwich type format with how it starts with text and then ends in text, and the middle of the sandwich are the visuals, because it keeps a consistent format throughout the page. 
+    </p>  
     <style>
       .bar{
         max-width: 55%; 
         margin-left:2%; 
-        transform: translate(0px, -300px); 
       }
      .line_chart{
        max-width: 55%; 
        margin-left:2%; 
-       transform: translate(0px, -200px); 
+      }
+      .part_1{
+        display: flex; 
+      }
+      .part_2{
+        display:flex; 
       }
     </style> 
   </body>
